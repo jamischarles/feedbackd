@@ -1,0 +1,49 @@
+@import url('blueprint.css'); /* Blueprint Style sheet*/
+@import url('typography.css');
+@import url('forms.css');
+
+/* Clean new styles */
+
+/* Layout
+-------------------------------------------------------------- */
+
+body{
+	
+}
+
+#wrapper{
+	margin: 0 auto;
+	width: 1050px;
+}
+
+.hidden{
+	display: none;
+}
+
+/* Global Typography
+-------------------------------------------------------------- */
+body{
+	background-color: #080b0d;
+	color: #efefef;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.2;
+}
+
+
+
+/* Navigation, links etc
+-------------------------------------------------------------- */
+a.listing_preview{
+	display: block;
+}
+
+a.listing_preview:hover{
+	background-color: #666 !important;
+	color: green;
+x	padding: 16px !important;
+}
+
+
+/* Homepage - Only
+-------------------------------------------------------------- */

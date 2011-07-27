@@ -1,0 +1,103 @@
+
+	<% content_for :head do %>  
+	<title>&mdash; Image Upload &mdash; </title>
+	
+	
+	<%= stylesheet_link_tag 'master' %> 
+	
+	<%= javascript_include_tag :defaults %> <!-- necessary so delete link will work for now... Fix this later...-->
+	<%= javascript_include_tag 'detail_funcs' %> 
+	
+	
+	<% end %>
+	
+
+	<!-- Image placeholder -->
+	<div class="" style="height: 400px; width: 500px; background-color: #747474; border: 2px solid #eee; float: left; margin-right: 20px;">
+
+			<% if @image.url != nil  %> <!-- Because only 1 image is returned, use .url directly because it's not an array... -->
+				<img id="newImg" width="500px" src="/images_user/<%= @image.url %>"  /> <!-- this should be prepped in the controller. I don't like having to do this manually... -->
+				
+				<!-- Show this when there is a thumbnail to show... -->
+				<!-- <img id="newImg" width="200px" src="/images_user/<%= @image.url %>"  /> --> 
+			<% end %>
+			
+			
+		
+			<!-- <img id="newImg" src="" /> -->
+		
+
+		<div style="color: #fff; text-align: center; margin-top: 155px;">Image Preview</div>
+	</div>
+	
+	<!-- <%= form_for :image, @image, :url => { :action => "create" }, :html => {:class => "nifty_form", :multipart => true} do |f| %> 
+	 
+		<%= f.file_field :url %> <br />
+		<%= submit_tag("Upload") %> 
+	<% end %> 
+	-->
+	<br /><br /> 
+	
+	
+	<h3>This one works:</h3>
+	<!-- WORKING one. -->
+	<%= form_for @image, :html => {:multipart => true} do |f| %>  
+		<%= f.file_field :url %> <br />
+		<%= submit_tag("Upload") %>
+	<% end %> 
+	
+	
+	<br /><br />
+	<p><%= link_to "Back to Posts", posts_path %></p>
+
+	<br /><br />
+	
+	<!-- For attachment fu. Currently broken.	-->
+	<!--
+	<h3>Proper Library one here:</h3>
+	
+	<%= form_for @image, :html => {:multipart => true} do |f| %>  
+	  <p>
+	    <label for="mugshot">Upload An Image:</label><br />
+	    <%= f.file_field :uploaded_data %>
+	  </p>
+	  <p>
+	    <%= submit_tag 'Upload' %>
+	  </p>
+	<% end -%>
+	-->
+
+
+
+	<div id="messages">
+		Delete outcome or other messages here...
+	</div>
+	<!-- There must be a better way to test this -->
+	<% if @image.url != nil  %>
+	<!-- Should we just add it to the DB already, and then the accept here just redirects, and reject removes it?. Not sure... -->
+	<div style="margin-left:586px; margin-top:159px;">
+		<!-- Accept Image, Could make this one simply too... ? -->
+		<%= form_for :image, @image, :url => { :action => "accept" }, :html => {:class => "nifty_form", :multipart => true} do |f| %> 
+			 
+			<%= hidden_field_tag(:url, @image.url) %> 
+			<%= hidden_field_tag(:post_id, 2) %> 
+			<%= submit_tag("Accept") %>
+		<% end %>
+		
+		<!-- Reject Image-->
+		<%# button_to "Reject", reject_path + "/" + @image.url %> 
+		<%= form_for :image, @image, :url => { :action => "reject" }, :html => {:class => "nifty_form", :multipart => true} do |f| %> 
+			 
+			<%= hidden_field_tag(:url, @image.url) %> 
+			<%= submit_tag("Reject") %>
+		<% end %>
+		
+		
+	</div> 
+	<% end %>
+	
+	<!-- Message:<br /> -->
+	<%# debug(@message) %>
+	
+	
+

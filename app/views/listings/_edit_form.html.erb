@@ -1,0 +1,126 @@
+<%
+# this partial is for the edit / update photographer data, including the image updates, and detail updates...
+
+%>
+<!-- Photographer Data -->
+<div class="append-bottom photo-data">
+	<%= form_for @listing, :listing, :url => {:controller => "listings", :action => "update_listing" }, :html => {:class => "nifty_form", :id => "edit_listing_form"} do |f| %>
+	
+		<h3 id="edit_name" class="detail hide_on_edit-js"><%= @listing.name %></h3>
+		<!-- Hidden form info -->
+		<h3 class="detail show_on_edit-js hidden"><%= f.text_field :name %></h3>
+		
+		<div class="append-bottom hide_on_edit-js">
+			in <span id="edit_city"><%= @listing.city %></span>, <span id="edit_state"><%= @listing.state %></span> <br />
+			<span id="edit_price"><% @listing.price.price_range %></span>
+		</div>
+		
+		<% if can? :update, @listing %>
+		<!-- Hidden form info... Consider grouping these better? -->
+		<div class="append-bottom show_on_edit-js hidden">
+			in <%= f.text_field :city %>, <%= f.text_field :state %> <br />
+			
+			<%= collection_select(:listing, :price_id, Price.all, :id, :price_range) 
+			#get the select from a collection. got this from rails guides. Awesome.
+			 %>
+			
+		</div>
+		<% end %>
+	
+		<p id="edit_description" class="append-bottom hide_on_edit-js"><%= @listing.description %></p>
+		<% if can? :update, @listing %><p class="append-bottom show_on_edit-js hidden"><%= f.text_area :description, :rows => "7", :cols => "60" %></p><% end %>
+	
+		<div class="append-bottom hide_on_edit-js" id="contact_container">
+			<h6>Contact Info:</h6>
+			<p>
+				<span id="edit_phone"><%= @listing.phone %></span><br />
+				<span id="edit_email"><%= @listing.email %></span><br />
+				<span id="edit_website"><%= @listing.website %></span>
+			</p>
+			<%# if user_signed_in? && current_user.id == @listing.user_id %>
+			<% if can? :update, @listing %>
+			<div class="append-bottom"><button type="button" class="edit_form">Edit this section</button></div>
+			<% end %>
+		</div>
+	
+		<%# consider moving this into the view helper? %>
+		<%# if user is signed in AND authenticated as owner %>
+		<% if can? :update, @listing %>
+		<!-- Hidden contact info -->
+		<div class="append-bottom show_on_edit-js hidden">
+			<h6>Contact Info:</h6>
+			<!-- Should we be using method:put when updating records? Don't think it's making a difference right now... -->
+	
+	
+		<%# form_tag(:controller => "listings", :action => "update", :method => "get", :class => "nifty_form") do |f| %>
+			<%= f.hidden_field :id %>
+			<%= f.text_field :phone %><br />
+			<%= f.text_field :email %><br />
+			<%= f.text_field :website %><br />
+			<%# f.text_area :email, :size => "60x12" %>
+		
+			<%# submit_tag "Save" %>
+			<!-- this should probably be unobtrusive with a fallback if the JS isn't attached properly?	-->
+			<button type="button" class="save">Save</button> <button type="button" class="cancel">Cancel</button> 
+	
+		</div>
+		<% end %>
+	
+		<div>
+			<h6>Reviews:</h6>
+			<p>"Love this guy. He rocks. Great Customer Service." By johno. 4/5</p>
+		</div>
+	
+	<% end %>
+</div>              
+
+<hr />
+
+<!-- Output existing images -->
+<% @listing.images.each do |image| %> 
+	<% if defined?(image) %>
+	<div id="comp_container" class="comp_container span-20 append-bottom">
+		<!-- <img class="span-20 append-bottom" src="/images_user/<%# image.url %>" /> -->
+		<%= image_tag image.photo.url(:medium) %>
+		<p><%= image.description %> </p>
+	</div>
+	
+		<% if can? :update, @listing %>
+			<div class="span-10">
+				Actions: <br /> 
+				<%= form_for image, :url => image_url, :html => {:multipart => true, :id => "edit_images"} do |f| %>
+					<%= f.hidden_field(:id) %><br />
+					Replace Image and Description
+					<%= f.file_field :photo %><br />
+					<span class="span-5"><%= f.text_field :description %></span>
+					
+					<%= submit_tag "Upload" %> <br />
+			
+					<%# link_to 'Delete', image, :confirm => 'Are you sure?', :method => :delete, :class => "delete_image" %> <br />
+					<button type="button" id="delete_<%= image.id %>" class="delete_image">Delete</button>
+				<% end %>
+			</div>
+		<% end %>	
+	<% end %>
+<% end %>
+
+<!-- Form for new images -->
+<% if can? :update, @listing %>
+<div class="span-20 append-bottom">
+<!-- <%# form_for :image, @image, :url => image_path, :html => { :multipart => true } do |f| %> -->
+<%= form_for @image, :url => "/images/new/#{@listing.id}" , :html => { :multipart => true } do |f| %>
+    <%= f.text_field :description %><br />
+	<%= f.file_field :photo %>
+	<%= submit_tag "Upload" %>
+  <% end %>
+</div>
+<% end %>
+
+<br /><br />
+<br /><br />
+<div class="span-20 append-bottom hidden">
+	<button>Contact Us</button> 
+</div>
+
+
+<%# debug(current_user.id)%>

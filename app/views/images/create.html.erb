@@ -1,0 +1,76 @@
+
+<% content_for :head do %>  
+<title>&mdash; Design Forum &mdash; </title>
+
+
+<%= stylesheet_link_tag 'master' %> 
+
+<%# javascript_include_tag :defaults %> <!-- necessary so delete link will work for now... Fix this later...-->
+
+
+
+<!-- JS Files Necessary for Fancybox -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+
+
+<script type="text/javascript">
+	//externalize this, or put in on the server side...
+	function splitUserData(str){
+		var splitArray = str.split("_");
+		$('#userName').val( splitArray[0] );
+		$('#userID').val( splitArray[1] );
+	}
+</script>
+<% end %>
+
+
+<div id="header" class="span-24 prepend-1" style="margin-bottom: 40px; padding-top: 35px;">
+	
+	
+	
+</div>
+                
+
+<div id="content" class="span-24 prepend-1 clearfix" style="padding-top: 15px;">
+	<!-- How do we test for an attached object of "images"? -->
+	
+	
+	
+	
+		<%# @image.each do |image| %> 
+			<%# if defined?(listing.images) %>
+			<div id="" class="span-7 ">
+				<a id="inline" href="<%# listings_detail_path + "/" + listing.id.to_s %>"> 
+				<h3><%# listing.name %></h3>
+				<div class="append-bottom">
+					in <%# listing.city %>, <%# listing.state %> <br />
+					<%# listing.price.price_range %>
+				</div>
+				<%# image_tag "/images_user/" + listing.images.first.url %> </a>
+				<%= image_tag @image.photo.url(:medium) %>
+				<!--
+				Rating: 4/5 stars <br />
+				Specialty: Weddings
+				<br /><br /><br />
+				<%# button_to 'Delete', listing, :method => :delete %> 
+				<%# link_to 'Delete', listing, :method => :delete %>
+				-->
+				
+				<br /><br />
+				<!-- <%= link_to "Link back to this page... ", listings_path %> -->
+	
+			</div>
+			<%# end %>
+		<%# end %>
+	
+		
+
+</div><!-- /#content -->
+
+<div class="span-12">
+	<%# debug(@image.photo.attributes) %>
+</div>                
+
+<div id="footer" class="container_16"><%= flash[@notice] %></div>
+
+

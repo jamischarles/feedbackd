@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+# rake db:fixtures:load will load these into the current environment
+# It will wipe out any records that are not defined in the fixtures...
+
+# record1: #generic info. for your benefit. Not used by rails
+#     url: Picture 6.png
+#     description: That was the sweetest party ever. I really enjoyed it.
+#     listing_id: 1
+#     
+# record1.5: #generic info. for your benefit. Not used by rails
+#     url: Picture 7.png
+#     description: These guys were really nice to us.
+#     listing_id: 1    
+#    
+# record2: 
+#     url: Picture 7.png
+#     description: These guys were really nice to us.
+#     listing_id: 2 
+#     
+# record3: 
+#     url: Picture 7.png
+#     description: Photo was taken with a Nikon D50.
+#     listing_id: 3
+#         
+# record4: 
+#     url: Picture 7.png
+#     description: Not a big fan.
+#     listing_id: 4
+#             
+# record5: 
+#     url: Picture 7.png
+#     description: Was a huge fan of this one.
+#     listing_id: 5
+#                 
+   

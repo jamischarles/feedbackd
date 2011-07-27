@@ -1,0 +1,133 @@
+<% content_for :head do %>  
+	<title>&mdash; Design Forum &mdash; </title> 
+	
+	<%= stylesheet_link_tag 'master' %> 
+	<%= stylesheet_link_tag 'forms' %> 
+	
+	
+	
+	<!-- YUI 3 Base. Host this locally?  -->
+	<script type="text/javascript" src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js"></script>
+	
+	<%= javascript_include_tag "detail_funcs" %>
+	
+	<!-- CSS 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.1.2/build/widget/assets/skins/sam/widget.css&3.1.2/build/widget/assets/skins/sam/widget-stack.css&3.1.2/build/overlay/assets/skins/sam/overlay.css">
+	
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.2/build/yui/yui-debug.js&3.1.2/build/oop/oop-debug.js&3.1.2/build/dom/dom-debug.js&3.1.2/build/event-custom/event-custom-debug.js&3.1.2/build/event/event-base-debug.js&3.1.2/build/pluginhost/pluginhost-debug.js&3.1.2/build/node/node-debug.js&3.1.2/build/event/event-delegate-debug.js&3.1.2/build/attribute/attribute-debug.js&3.1.2/build/base/base-debug.js&3.1.2/build/event/event-resize-debug.js&3.1.2/build/event/event-mouseenter-debug.js&3.1.2/build/dd/dd-debug.js&3.1.2/build/dump/dump-debug.js&3.1.2/build/json/json-debug.js&3.1.2/build/querystring/querystring-stringify-simple-debug.js&3.1.2/build/queue-promote/queue-promote-debug.js&3.1.2/build/datatype/datatype-xml-debug.js&3.1.2/build/io/io-debug.js&3.1.2/build/event/event-focus-debug.js&3.1.2/build/classnamemanager/classnamemanager-debug.js&3.1.2/build/widget/widget-debug.js&3.1.2/build/widget/widget-stdmod-debug.js&3.1.2/build/widget/widget-position-debug.js&3.1.2/build/widget/widget-position-align-debug.js&3.1.2/build/widget/widget-stack-debug.js&3.1.2/build/widget/widget-position-constrain-debug.js&3.1.2/build/overlay/overlay-debug.js&3.1.2/build/loader/loader-debug.js"></script>
+	-->
+	<!--<script type="text/javascript" src="/includes/detail_funcs.js"></script> -->
+		
+<% end %>
+
+
+	<div id="actions_menu" class="append-bottom">
+		<%= link_to "Back to all listings ", listings_path %> <!-- ||   <a id="toggleAllZonesLink" href="javascript:;">Toggle Overlays</a> | <a href="javascript:;" id="addCommentOverlayLink">Add Comment Overlay</a> | <a href="javascript:;" id="toggleAuthorComments">Toggle Author Comments</a>  <a href="javascript:;" onclick="document.getElementById('share_overlay').className='overlay_general'" style="float: right; margin-right: 10px;">Share this</a> -->  <!-- <a href="javascript:;" onclick="$('#area_1').show();">Add new comment zone</a> --> <!--  | <a href="#img">Skip to Image</a>  -->   <!-- Creates a new div. Positions it center somewhere. Add resizable and draggable to it. -->
+	</div>
+	
+	
+	
+	<div id="header" class="container_16" style="">
+		<!-- <a href="detail2_comments.php">Show Commments</a> -->
+	</div>
+	
+	<div class="wrapper prepend-1">
+	
+		<%# create new image so it's ready in the form %>
+		<% @listing.images.build %>
+		<%= form_for @listing, :listing, :url => {:controller => "listings", :action => "create" }, :html => {:class => "nifty_form", :id => "edit_listing_form", :multipart => true} do |listing_form| %>
+		
+			<fieldset id="" class="">
+				<legend>Contact Details</legend>
+				
+				<p>
+					<%= listing_form.label(:name, "Name:") %><br />
+					<%= listing_form.text_field :name, :placeholder => "Company or personal name" %>
+				</p>
+				
+				<p>
+					<%= listing_form.label(:city, "City:") %><br />
+					<%= listing_form.text_field :city, :placeholder => "What City do you live in?" %>
+				</p>
+				
+				<p>
+					<%= listing_form.label(:state, "State:") %><br />
+					<%= listing_form.text_field :state, :placeholder => "What state do you live in" %>
+				</p>
+				
+				<p>
+					<%= listing_form.label(:price_range, "Price Range:") %><br />
+					<%= collection_select(:listing, :price_id, Price.all, :id, :price_range) 
+					#get the select from a collection. got this from rails guides. Awesome.
+					 %>
+				</p>
+				
+				<p>
+					<%= listing_form.label(:description, "Description:") %><br />
+					<%= listing_form.text_area :description, :rows => "7", :cols => "60", :placeholder => "Describe yourself and your company" %>
+				</p>
+				
+				<p>
+					<%# listing_form.hidden_field :id %>
+					<%= listing_form.label(:phone, "Phone:") %><br />
+					<%= listing_form.text_field :phone %><br />
+					<%= listing_form.label(:email, "E-mail:") %><br />
+					<%= listing_form.text_field :email %><br />
+					<%= listing_form.label(:website, "Website:") %><br />
+					<%= listing_form.text_field :website, :placeholder => "www.johnsphotos.com" %><br />
+				</p>
+			</fieldset>
+		
+			<fieldset id="" class="">
+				<legend>Images</legend>
+				<%= render :partial => 'images/form', :locals => {:form => listing_form} %>
+				
+				
+				
+				<%# form_for @image, :url => "/images/new/#{@listing.id}" , :html => { :multipart => true } do |f| %>
+				<p>    
+					<%# f.label(:description, "Image Description:") %><br />
+					<%# f.text_field :description %><br />
+					
+					<%# f.file_field :photo %>
+				</p>	
+					<%# submit_tag "Upload" %>
+				<%# end %>
+				
+			</fieldset>	
+		
+			<%= submit_tag "Create Listing", :style => "margin-bottom: 250px;" %>
+			
+		<% end %>
+	
+		<!-- Form Content start -->
+		<!-- <input type="text" name="title" value="" id="title"> -->
+		
+		
+		
+		
+		<%# debug(@listing.attributes)%> 
+		
+		
+	          
+		<!-- Form Content END -->
+	
+	</div><!-- /.wrapper -->
+	
+	
+	
+	
+	<div id="footer" class="append-bottom span-20"></div> 
+
+	<script type="text/javascript">
+		//fb.init(<%# @post.images.first.post_id %>, "jamis"); 
+		//fb.init(<?php echo $postData[0]->post_id;?>, "<?=$this->session->userdata('username'); ?>"); 
+		//get getThreadData. Make this an ajax call...
+		//fb.getThreadData(<?php echo $postData[0]->post_id;?>);
+		
+		//consider putting this in the JS itself?
+		fb.init(); //load the YUI dependencies
+		//fb.updateListing(document.getElementById("edit_listing_2"));
+		//console.log(fb);
+	</script>
+	

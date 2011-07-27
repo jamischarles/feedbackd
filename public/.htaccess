@@ -1,0 +1,18 @@
+# set up for RailsPlayground. This file is in a shared file, env specific. Place it in the copy_to folder on the server. Capistrano copies it in.
+
+# THIS IS AN EXAMPLE. THIS FILE IS OVERWRITTEN with the CAP deploy.
+
+#staging setup, for Rails 3, use RackBaseURI!!!
+RackBaseURI /staging
+PassengerAppRoot /home/feedback/rails/foolio_staging/current
+#that above gives access right to that folder...
+#set env to staging
+# RailsEnv staging #above was RailsBaseURI, so this one changed too, I assume? CORRECT
+RackEnv staging
+
+
+
+#prod setup
+RackBaseURI /prod
+PassengerAppRoot /home/feedback/rails/foolio/current
+#that above gives access right to that folder...

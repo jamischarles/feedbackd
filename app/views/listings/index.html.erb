@@ -1,0 +1,119 @@
+
+	<% content_for :head do %>  
+	<title>&mdash; Design Forum &mdash; </title>
+	
+	
+	<%= stylesheet_link_tag 'master' %> 
+	
+	<%# javascript_include_tag :defaults %> <!-- necessary so delete link will work for now... Fix this later...-->
+	
+	
+	
+	<!-- JS Files Necessary for Fancybox -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+	
+	
+	<script type="text/javascript">
+		//externalize this, or put in on the server side...
+		function splitUserData(str){
+			var splitArray = str.split("_");
+			$('#userName').val( splitArray[0] );
+			$('#userID').val( splitArray[1] );
+		}
+	</script>
+	<% end %>
+	
+	<div id="wrapper">
+		<div id="header" class="span-14 prepend-1" style="margin-bottom: 40px; padding-top: 35px;">
+			<%# link_to "Upload a new Comp", upload_path %>  
+	
+			<div class="span-15 append-bottom">
+				<div class="span-10">
+				<% if user_signed_in? %>
+			    	Signed in as <%= current_user.email %>. Not you?
+			    	<%= link_to "Sign out", destroy_user_session_path %>
+			 	<% else %>
+			    	<%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+			  	<% end %>
+				</div>
+		
+				<!-- <button class="fr span-4" onclick="document.location = '<%=new_listing_path %>'">Create Listing</button> -->
+				<%= button_to "Create Listing", new_listing_path, :class => "fr span-4" %>
+			
+			</div>
+		
+			<div>
+			
+				<h3>Find a photographer ...</h3>
+				
+				<div class="span-15">
+					in San Antonio, TX, for
+					<select name="some_name" id="some_name" onchange="" size="1" class="">
+						<option value="option1">$100 &ndash; $500</option>
+						<option value="option1">$500 &ndash; $1,000</option>
+						<option value="option1">$1,000 &ndash; $5,000</option>
+				
+					</select>
+				
+					<button>Go</button>
+				</div>	
+			</div>
+		</div>
+	                
+	
+		<div id="content" class="span-14 prepend-1 clearfix" style="padding-top: 15px;">
+			<!-- How do we test for an attached object of "images"? -->
+		
+			<% if defined?(@listings) %>
+				<%# debug(@listings[1].images) %>
+			<% end %>
+		
+		
+		
+				<% @listings.each do |listing| %> 
+					<% if defined?(listing.images) %>
+					<a class="listing_preview" href="<%= listings_detail_path + "/" + listing.id.to_s %>"> 
+					<div id="" class="span-4">
+						
+						<h3><%= listing.name %></h3>
+						<div class="append-bottom">
+							in <%= listing.city %>, <%= listing.state %> <br />
+							<%  listing.price.price_range %>
+						</div>
+						<%# image_tag "/images_user/" + listing.images.first.url %> 
+						<% if defined?(listing.images.first.photo) %>
+						<%= image_tag listing.images.first.photo.url(:small), :class => "span-4" %>
+						<% end %>
+						
+						<br />
+						<button onclick="document.location = '<%= listings_detail_path + "/" + listing.id.to_s %>'"><%= listing.name %></button>
+						<br />
+					
+						Rating: 4/5 stars <br />
+						Specialty: Weddings
+						<br /><br /><br />
+						<%= button_to 'Delete', listing, :method => :delete %> 
+						<%# link_to 'Delete', listing, :method => :delete %>
+					
+					
+						<br /><br />
+						<!-- <%= link_to "Link back to this page... ", listings_path %> -->
+		
+					</div> <!-- /.span-4 -->
+					</a>
+					<% end %>
+				<% end %>
+		
+			
+	
+		</div><!-- /#content -->
+	
+		<div class="span-12">
+			<%# debug(@listings[0].images[2]) %>
+		</div>                
+	
+		<div id="footer" class="container_16"><%= flash[@notice] %></div>
+	
+	</div> <!-- /#wrapper -->
+	
+

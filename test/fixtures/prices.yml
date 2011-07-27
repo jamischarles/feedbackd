@@ -1,0 +1,22 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+price1: #generic info. for your benefit. Not used by rails
+    id: 1
+    price_range: $100 - $500
+    
+price2: #generic info. for your benefit. Not used by rails
+    id: 2
+    price_range: $500 - $1,000    
+    
+price3: #generic info. for your benefit. Not used by rails
+    id: 3
+    price_range: $1,000 - $10,000    
+    
+price4: #generic info. for your benefit. Not used by rails
+    id: 4
+    price_range: $10,000 - $100,000    
+    

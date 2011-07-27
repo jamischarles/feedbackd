@@ -1,0 +1,144 @@
+<!--
+TODO file
+
+FIND OUT: 
+If the image doesn't exist, it throws an error. How do you solve for that?
+
+
+IT 6 - Get to MVP 3. No ratings. No reviews. Create account. Show in San Antonio. Filter...
+
+TODO
+20) Look at adding a draft status to a listing
+
+21) Try to combine create user flow into Create Listing Flow?
+	- then try to combine it with create user flow? (try to something easier for now, just to get it working)
+
+
+
+21) Add Cucumber Feature to test for image inclusion and upload...
+
+ASK ON STACKOVERFLOW ABOUT FORCING THE SEED DATA ID BECAUSE OF THE DEPENDENCIES...?
+
+19) Code out basic create flow
+	- use a partial to re-use the update flow. - DONE
+	- modify existing flow so it works with a) empty record and b) full record... - DONE
+	- write a cucumber test case for this, and various combinations (LATER)
+	- then add a new snippet at the bottom... (for new user info)
+	- ADD create user view to bottom (WATCH CUSTOMIZE DEVISE VIDEO FIRST)
+	- ADD logic to use current user if you're authenticated...
+	
+- Change listing logic, so it's not created until they hit save... Or at least it should be in draft form first? 	
+	
+- THINK about: Either validation when creating record, OR when moving record from draft to publish form...
+- CONSIDER just making it easier to have a separate create flow... It may be enough to combine the update and display flows...	
+- Then again, the update flow will need validation no matter what... Maybe you can validate before updating, not before validation? And respond with Flash
+notices if it doesn't validate...?
+- TODO SKETCH OUT THE CREATE FLOW...	
+	
+20) Write delete method for Listing... That deletes all the depencenies...	- DONE
+
+20) Hook up backend
+
+21) Tie it all together
+
+22) Fix auth 
+
+
+TESTING:
+- take a look at capyabara...
+
+
+
+20) Add ajax CRUD w/ feedback	
+- ajax upload (with YUI frontent) - LATER
+	- look at YUI gallery for yellow remove highlight (and other interactions like that...)
+	- consider the ramifications of swapping out an image like that... You would have to ensure that the same image isn't being used across 2 listings,
+	or it would switch them out in both locations... Can you use them? This should be an issue. Keep eyes open nonetheless.
+	- Update image description...
+	- adjust image sizes to what they should be so they don't have to be stretched / resized in the html
+
+
+	- Figure out how we can handle a failure response gracefully, in an JSON response, instead of the output html page...
+	
+
+- get the Rails app viewable through the URL - FAILED. Switch to Railsplayground...
+
+Look into closures and how YUI handles namespacing.
+Can the 2 not co-exist nicely...
+It all depends on what need to be available when...
+
+
+	
+16.5) Fix the horrible update treatment... - LATER
+
+	
+
+
+18) Have create new listing / new account flow...
+
+- Consider having a draft and a publish state, so they can make the changes live ...? Too much work at first...
+
+
+14) Fix flash notice on account signin... ? Read up on Flash alerts & Notices
+
+15) Have homepage be filterable (queryable) with params (just with Price / location for now...) - LATER
+
+ 
+
+
+Getting into TDD. Start integrating with this as I'm building.
+
+
+DONE
+1) Build Dirty Detail Page (dummy data) - DONE
+2) Consider adding in blueprint css for typography etc... - DONE
+3) Get basic flow working? - DONE
+4) Build Result View (Dummy) (follow comps) - DONE
+5) Test & validate fixtures can be used to build the dev db - DONE
+6) Model out DB - DONE
+7) Create fixtures with new structure - DONE
+8) Hook up front end to backend on results page. - DONE
+9) FIX homepage so it outputs with new records and new data. - DONE
+9.5) Solve how to output Prices table properly (modeling probelm?) - DONE
+10) Plan out whether to do auth, or create flow first. - DONE
+11) Install Devise - DONE
+12) Read up on devise - DONE
+13) Add devise to 1 page, be able to login - DONE
+14) Move on to Create Acct flow... - DONE
+15) Decided to combine crud with create acct flow... - DONE
+16) Edit in Place for fields - DONE
+	- Update for all text fields.
+	- Ajax in place update...
+16.8) Consider removing the form data and having JS just create all of that on the fly? maybe not... - NO
+16.9) Consider making it all part of the same form?	- DONE
+16.9.1) Fix price_range ajax - DONE
+	- have it populate with dropdowns
+	- have the ajax return bring in the price_range cols
+Servers
+	- Figure out what server I need to run. For now, just choose fastcgi (appears to be simplest) - DONE
+	- START with Apache / Fastcgi - DONE
+	- decide between passenger, mongrel, or fastcgi for actually running it (varying levels of difficulty. Do research...) - DONE	
+	- A: Use passenger with Railsplayground. Use Capistrano to deploy. Use Rackspace cloudfiles to host the files.
+17) Upload image in place for images - DONE
+	- get image upload working for just - DONE
+	- test view - DONE
+	- see if installing imagemagic helps - DONE
+	- update, delete img - DONE
+	- store photos by /:listing_id/photo_id - DONE	
+18) CAPISTRANO DEPLOYMENT:
+	- Set up the DB on the server - DONE
+	- run migrations as part of cap to do it - DONE
+	- set environment vas properly... - DONE
+	- continue to test out - DONE	
+19) CREATE Listing flow
+	- write Cucumber step for it -> How do you handle Devise auth? Testing for auth? - DONE
+	- start a separate create flow - DONE
+	- create entire form  - DONE
+	- validate test case - DONE
+	- have it be 1 form - DONE
+	- add virtual attribs for adding the image - DONE
+	- 1 create button at the bottom - DONE
+	- at end run against Cucumber again until it passes... - DONE
+	- Fix Image upload so it works in the same listing create flow... - DONE
+	- FIX update listing flow... - DONE
+-->

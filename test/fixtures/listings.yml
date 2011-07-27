@@ -1,0 +1,61 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+
+listing1: #generic info. for your benefit. Not used by rails
+    id: 1
+    name: Sunset Pictures
+    phone: 210-877-2534
+    email: johnson@photos.com
+    website: www.johnsonphotos.com
+    city: San Antonio
+    state: TX
+    description: We've been here a long time. I have 20 years of photography experience and love what I do. I've worked with with many wonderful people and look forward to working with you.
+    price_id: 1
+   
+listing2: 
+    id: 2
+    name: Sunset Boulevard
+    phone: 210-877-2534
+    email: johnson@photos.com
+    website: www.johnsonphotos.com
+    city: San Antonio
+    state: TX
+    description: We've been here a long time. I have 20 years of photography experience and love what I do. I've worked with with many wonderful people and look forward to working with you.
+    price_id: 2
+    
+listing3: 
+    id: 3
+    name: ANother Place
+    phone: 210-877-2534
+    email: johnson@photos.com
+    website: www.johnsonphotos.com
+    city: San Antonio
+    state: TX
+    description: We've been here a long time. I have 20 years of photography experience and love what I do. I've worked with with many wonderful people and look forward to working with you.
+    price_id: 2
+        
+listing4: 
+    id: 4
+    name: Dude
+    phone: 210-877-2534
+    email: johnson@photos.com
+    website: www.johnsonphotos.com
+    city: San Antonio
+    state: TX
+    description: We've been here a long time. I have 20 years of photography experience and love what I do. I've worked with with many wonderful people and look forward to working with you.
+    price_id: 3
+            
+listing5: 
+    id: 5
+    name: Ipsum dolor
+    phone: 210-877-2534
+    email: johnson@photos.com
+    website: www.johnsonphotos.com
+    city: San Antonio
+    state: TX
+    description: We've been here a long time. I have 20 years of photography experience and love what I do. I've worked with with many wonderful people and look forward to working with you.
+    price_id: 4
